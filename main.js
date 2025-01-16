@@ -16,13 +16,17 @@ const config = {
   
   // preload room and sprite
   function preload() {
-    
+
+    this.load.image('floor', 'assets/floor.png');
+
   }
   
   // initialize objects
   function create() {
     // char
     // background
+    this.add.image(0, 0, 'floor').setOrigin(0, 0);
+
     
   }
   
