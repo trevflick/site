@@ -27,6 +27,9 @@ const config = {
   var player;
   var ground;
   var wall;
+  // for keyboard input
+  var cursors;
+
 
   // text box above the scene do i have to extend it to do that?
   // need a cursor object for selecting items in house
@@ -46,7 +49,7 @@ const config = {
     this.load.image('ground', 'assets/ground.png');
     this.load.spritesheet('idleLeft', 'assets/idleLeft.png', {frameWidth:64, frameHeight:64})
     this.load.spritesheet('idleRight', 'assets/idleRight.png', {frameWidth:64, frameHeight:64})
-    this.load.spritesheet('sittings', 'assets/sitting.png', {frameWidth:64, frameHeight:64})
+    this.load.spritesheet('sitting', 'assets/sitting.png', {frameWidth:64, frameHeight:64})
     this.load.spritesheet('walkLeft', 'assets/walkLeft.png', {frameWidth:64, frameHeight:64})
     this.load.spritesheet('walkingRight', 'assets/walkingRight.png', {frameWidth:64, frameHeight:64})
     this.load.spritesheet('lookUpLeft', 'assets/lookUpLeft.png', {frameWidth:64, frameHeight:64})
@@ -56,6 +59,9 @@ const config = {
   
   // initialize objects
   function create() {
+
+    cursors = this.input.keyboard.createCursorKeys();
+
     // the order you add items is how they appear (make sure background is before everything else)
     // background
     this.add.image(0, 0, 'sky').setOrigin(0, 0);
@@ -66,12 +72,12 @@ const config = {
     platforms = this.physics.add.staticGroup();
 
     // change this to correct spot
-    platforms.create(0, 100, 'ground').setScale(2).refreshBody();
+    platforms.create(0, 101, 'ground').setScale(2).refreshBody();
 
 
 
     // char (might need to figure this out, idk if i need two players for left and right yet)
-    player = this.physics.add.sprite(0, 0, 'idleLeft');
+    player = this.physics.add.sprite(100, 100, 'idleLeft');
 
     // run into edge of map and don't fall through
     player.setCollideWorldBounds(true);
@@ -83,7 +89,7 @@ const config = {
     // idle left
     this.anims.create({
       key: 'standLeft',
-      frames: this.anims.generateFrameNumbers('idleLeft', { start: 0, end: 8 }),
+      frames: this.anims.generateFrameNumbers('idleLeft', { start: 0, end: 7 }),
       frameRate: 7,
       repeat: -1
     });
@@ -91,7 +97,7 @@ const config = {
     // idle right
     this.anims.create({
       key: 'standRight',
-      frames: this.anims.generateFrameNumbers('idleRight', { start: 0, end: 8 }),
+      frames: this.anims.generateFrameNumbers('idleRight', { start: 0, end: 7 }),
       frameRate: 7,
       repeat: -1
     });
@@ -99,7 +105,7 @@ const config = {
     // need animation for walking left
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('walkLeft', { start: 0, end: 4 }),
+      frames: this.anims.generateFrameNumbers('walkLeft', { start: 0, end: 3 }),
       frameRate: 7,
       repeat: -1
     });
@@ -107,7 +113,7 @@ const config = {
     // walking right
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('walkingRight', { start: 0, end: 4 }),
+      frames: this.anims.generateFrameNumbers('walkingRight', { start: 0, end: 3 }),
       frameRate: 7,
       repeat: -1
     });
@@ -116,7 +122,7 @@ const config = {
     // specific spot)
     this.anims.create({
       key: 'satDown',
-      frames: this.anims.generatedFrameNumbers('sitting', {start:0, end: 2}),
+      frames: this.anims.generateFrameNumbers('sitting', {start:0, end: 1}),
       frameRate: 7,
       repeat: -1
     })
@@ -124,7 +130,7 @@ const config = {
     // looking up left
     this.anims.create({
       key: 'UpLeft',
-      frames: this.anims.generatedFrameNumbers('lookUpLeft', {start:0, end: 8}),
+      frames: this.anims.generateFrameNumbers('lookUpLeft', {start:0, end: 7}),
       frameRate: 7,
       repeat: -1
     })
@@ -132,7 +138,7 @@ const config = {
     // looking up right
     this.anims.create({
       key: 'UpRight',
-      frames: this.anims.generatedFrameNumbers('lookUpRight', {start:0, end: 8}),
+      frames: this.anims.generateFrameNumbers('lookUpRight', {start:0, end: 7}),
       frameRate: 7,
       repeat: -1
     })
