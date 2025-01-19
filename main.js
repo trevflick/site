@@ -29,6 +29,9 @@ const config = {
   var wall;
   // for keyboard input
   var cursors;
+  // keep track of direction (left/right)
+  // so it looks smooth
+  var facing = 'left';
 
 
   // text box above the scene do i have to extend it to do that?
@@ -90,7 +93,7 @@ const config = {
     this.anims.create({
       key: 'standLeft',
       frames: this.anims.generateFrameNumbers('idleLeft', { start: 0, end: 7 }),
-      frameRate: 7,
+      frameRate: 6,
       repeat: -1
     });
 
@@ -98,13 +101,13 @@ const config = {
     this.anims.create({
       key: 'standRight',
       frames: this.anims.generateFrameNumbers('idleRight', { start: 0, end: 7 }),
-      frameRate: 7,
+      frameRate: 6,
       repeat: -1
     });
 
     // need animation for walking left
     this.anims.create({
-      key: 'left',
+      key: 'leftWalk',
       frames: this.anims.generateFrameNumbers('walkLeft', { start: 0, end: 3 }),
       frameRate: 7,
       repeat: -1
@@ -112,7 +115,7 @@ const config = {
 
     // walking right
     this.anims.create({
-      key: 'right',
+      key: 'rightWalk',
       frames: this.anims.generateFrameNumbers('walkingRight', { start: 0, end: 3 }),
       frameRate: 7,
       repeat: -1
@@ -131,7 +134,7 @@ const config = {
     this.anims.create({
       key: 'UpLeft',
       frames: this.anims.generateFrameNumbers('lookUpLeft', {start:0, end: 7}),
-      frameRate: 7,
+      frameRate: 6,
       repeat: -1
     })
 
@@ -152,28 +155,36 @@ const config = {
 
     if (cursors.left.isDown)
         {
-            player.setVelocityX(-160);
+            facing = 'left';
 
-            player.anims.play('left', true);
+            player.setVelocityX(-70);
+
+            player.anims.play('leftWalk', true);
         }
         else if (cursors.right.isDown)
         {
-            player.setVelocityX(160);
+            facing = 'right';
 
-            player.anims.play('right', true); // will only play if not already playing
+            player.setVelocityX(70);
+
+            player.anims.play('rightWalk', true); // will only play if not already playing
+        }
+        else if (cursors.up.isDown)
+        {
+          if (facing === 'left') {
+            player.anims.play('UpLeft', true);
+          } else {
+            player.anims.play('UpRight', true);
+          }
         }
         else // need two here, one for idleLeft and idleRight
         {
             player.setVelocityX(0);
-
-            player.anims.play('standLeft'); //
-        }
-
-        if (cursors.up.isDown && player.body.touching.down)
-        {
-            player.setVelocityY(0);
-
-            player.anims.play('UpLeft')  // add true
+            if (facing === 'left') {
+              player.anims.play('standLeft', true);
+            } else {
+              player.anims.play('standRight', true);
+            }
         }
 
 
