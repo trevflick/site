@@ -29,9 +29,7 @@ const config = {
   var wall;
   // for keyboard input
   var cursors;
-  // keep track of direction (left/right)
-  // so it looks smooth
-  var facing = 'left';
+  
 
 
   // text box above the scene do i have to extend it to do that?
@@ -57,6 +55,8 @@ const config = {
     this.load.spritesheet('walkingRight', 'assets/walkingRight.png', {frameWidth:64, frameHeight:64})
     this.load.spritesheet('lookUpLeft', 'assets/lookUpLeft.png', {frameWidth:64, frameHeight:64})
     this.load.spritesheet('lookUpRight', 'assets/lookUpRight.png', {frameWidth:64, frameHeight:64})
+    this.load.spritesheet('wave', 'assets/wave.png', {frameWidth:64, frameHeight:64})
+
 
   }
   
@@ -81,6 +81,9 @@ const config = {
 
     // char (might need to figure this out, idk if i need two players for left and right yet)
     player = this.physics.add.sprite(100, 100, 'idleLeft');
+    // keep track of this
+    player.facing = 'left';
+
 
     // run into edge of map and don't fall through
     player.setCollideWorldBounds(true);
@@ -146,47 +149,55 @@ const config = {
       repeat: -1
     })
 
-
+    // waving
+    this.anims.create({
+      key: 'waving',
+      frames: this.anims.generateFrameNumbers('wave', {start:0, end: 4}),
+      frameRate: 7,
+      repeat:-1
+    })
   }
   
   // gonna get called for every frame update (idk what phaser framerate is auto set to)
-  // i assume i can update the logic for the game in this function
+  // update commands for game in this 
   function update() {
+    // PRESS UP: waving function
+    if (cursors.up.isDown) {
+      // ptop moving left or right if in motion
+      player.setVelocityX(0);
+      player.anims.play('waving', true);
 
-    if (cursors.left.isDown)
-        {
-            facing = 'left';
+      
+  
+      // return so the frame ends 
+      // DO NOT DELETE (movement looks really glitchy without this)
+      return;
+    }
+  
+    // PRESS LEFT: walk left
+    if (cursors.left.isDown) {
 
-            player.setVelocityX(-70);
+      player.facing = 'left';
+      player.setVelocityX(-70);
+      player.anims.play('leftWalk', true);
 
-            player.anims.play('leftWalk', true);
-        }
-        else if (cursors.right.isDown)
-        {
-            facing = 'right';
+    }
+    // PRESS RIGHTL walk right
+    else if (cursors.right.isDown) {
 
-            player.setVelocityX(70);
+      player.facing = 'right';
+      player.setVelocityX(70);
+      player.anims.play('rightWalk', true);
 
-            player.anims.play('rightWalk', true); // will only play if not already playing
-        }
-        else if (cursors.up.isDown)
-        {
-          if (facing === 'left') {
-            player.anims.play('UpLeft', true);
-          } else {
-            player.anims.play('UpRight', true);
-          }
-        }
-        else // need two here, one for idleLeft and idleRight
-        {
-            player.setVelocityX(0);
-            if (facing === 'left') {
-              player.anims.play('standLeft', true);
-            } else {
-              player.anims.play('standRight', true);
-            }
-        }
-
-
+    }
+    // play idle animation if not moving
+    else {
+      player.setVelocityX(0);
+      if (player.facing === 'left') {
+        player.anims.play('standLeft', true);
+      } else {
+        player.anims.play('standRight', true);
+      }
+    }
   }
   
