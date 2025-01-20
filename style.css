@@ -8,6 +8,7 @@
     background-size: 256px 256px; /* size up */
     background-color: #6b7b87; /* fallback */
     image-rendering: pixelated; /* awesome scaling tool */
+    background-position: 0 -7px;
 
 
   }
