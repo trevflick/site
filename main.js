@@ -2,12 +2,14 @@
 // game configuration
 const config = {
     type: Phaser.AUTO,  
-    width: 341,
+    width: 340,
     height: 100,
     pixelArt: true,   // declare this for upscaling
     scale: {
-      mode: Phaser.Scale.NONE,
-      zoom: 3                  
+      mode: Phaser.Scale.FIT, // FIT for full screen, None for smaller
+      zoom: 2,
+      autoCenter: Phaser.Scale.CENTER_BOTH  // put it in the MIDDLE of page
+                  
     },
     physics: {
       default: 'arcade',
@@ -33,7 +35,6 @@ const config = {
 
 
   // text box above the scene do i have to extend it to do that?
-  // need a cursor object for selecting items in house
   // gonna start with 3, diploma, github, and resume
 
 
@@ -55,7 +56,8 @@ const config = {
     this.load.spritesheet('walkingRight', 'assets/walkingRight.png', {frameWidth:64, frameHeight:64})
     this.load.spritesheet('lookUpLeft', 'assets/lookUpLeft.png', {frameWidth:64, frameHeight:64})
     this.load.spritesheet('lookUpRight', 'assets/lookUpRight.png', {frameWidth:64, frameHeight:64})
-    this.load.spritesheet('wave', 'assets/wave.png', {frameWidth:64, frameHeight:64})
+    this.load.spritesheet('waveLeft', 'assets/waveLeft.png', {frameWidth:64, frameHeight:64})
+    this.load.spritesheet('waveRight', 'assets/waveRight.png', {frameWidth:64, frameHeight:64})
 
 
   }
@@ -68,20 +70,22 @@ const config = {
     // the order you add items is how they appear (make sure background is before everything else)
     // background
     this.add.image(0, 0, 'sky').setOrigin(0, 0);
-    //this.add.image(170, 50, 'scene');
 
 
     // add ground
     platforms = this.physics.add.staticGroup();
 
     // change this to correct spot
-    platforms.create(0, 101, 'ground').setScale(2).refreshBody();
+    //platforms.create(0, 100, 'ground').setScale(2).refreshBody();
+    platforms.create(0, 100, 'ground').refreshBody();
 
 
 
     // char (might need to figure this out, idk if i need two players for left and right yet)
-    player = this.physics.add.sprite(100, 100, 'idleLeft');
-    // keep track of this
+    player = this.physics.add.sprite(310, 100, 'idleLeft');
+    // model isn't fully on ground in the assets so offset down to floor
+    player.setOffset(0,-5);
+    // keep track of this for animation smoothness
     player.facing = 'left';
 
 
@@ -149,13 +153,22 @@ const config = {
       repeat: -1
     })
 
-    // waving
+    // waving left
     this.anims.create({
-      key: 'waving',
-      frames: this.anims.generateFrameNumbers('wave', {start:0, end: 4}),
+      key: 'wavingLeft',
+      frames: this.anims.generateFrameNumbers('waveLeft', {start:0, end: 4}),
       frameRate: 7,
       repeat:-1
     })
+
+    // waving right
+    this.anims.create({
+      key: 'wavingRight',
+      frames: this.anims.generateFrameNumbers('waveRight', {start:0, end: 4}),
+      frameRate: 7,
+      repeat:-1
+    })
+
   }
   
   // gonna get called for every frame update (idk what phaser framerate is auto set to)
@@ -165,7 +178,11 @@ const config = {
     if (cursors.up.isDown) {
       // ptop moving left or right if in motion
       player.setVelocityX(0);
-      player.anims.play('waving', true);
+      if (player.facing === 'left') {
+        player.anims.play('wavingLeft', true);
+      } else {
+        player.anims.play('wavingRight', true);
+      }
 
       
   
