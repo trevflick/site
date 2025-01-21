@@ -59,6 +59,12 @@ const config = {
     this.load.spritesheet('waveRight', 'assets/waveRight.png', {frameWidth:64, frameHeight:64})
     this.load.image('diploma', 'assets/diploma.png');
     this.load.image('chair', 'assets/chair.png');
+    this.load.image('laptop', 'assets/laptop.png');
+    this.load.image('trophy', 'assets/trophy.png');
+    this.load.image('notes', 'assets/notes.png');
+    this.load.image('toDoList', 'assets/toDoList.png');
+
+
 
 
 
@@ -253,6 +259,161 @@ const config = {
       });
     
   });
+
+  // laptop object
+  // Diploma image proportions (relative to the image size)
+  const laptopImageWidth = 340; // Width of the laptop.png image
+  const laptopImageHeight = 100; // Height of the laptop.png image
+
+  // laptop's position and size within the image
+  const laptopOriginalX = 138; // X position in the original image
+  const laptopOriginalY = 60; // Y position in the original image
+  const laptopOriginalWidth = 19; // Width of the laptop
+  const laptopOriginalHeight = 12; // Height of the laptop
+
+  // Scale these values proportionally to match the game world
+  const LAPTOPinteractiveX = (laptopOriginalX / laptopImageWidth) * this.cameras.main.width;
+  const LAPTOPinteractiveY = (laptopOriginalY / laptopImageHeight) * this.cameras.main.height;
+  const LAPTOPinteractiveWidth = (laptopOriginalWidth / laptopImageWidth) * this.cameras.main.width;
+  const LAPTOPinteractiveHeight = (laptopOriginalHeight / laptopImageHeight) * this.cameras.main.height;
+
+  // Add the laptop image
+  const laptop = this.add.image(0, 0, 'laptop').setOrigin(0, 0).setDisplaySize(
+  this.cameras.main.width, 
+  this.cameras.main.height
+  );
+
+  // Define the interactive area for the laptop itself
+  laptop.setInteractive(
+  new Phaser.Geom.Rectangle(LAPTOPinteractiveX, LAPTOPinteractiveY, LAPTOPinteractiveWidth, LAPTOPinteractiveHeight),
+  Phaser.Geom.Rectangle.Contains
+  );
+
+
+  // Add interaction
+  laptop.on('pointerdown', () => {
+  console.log('laptop clicked!');
+  window.open('https://github.com/capstone-projects-2024-fall/aldwairi-projects-skribble', '_blank', 'noopener,noreferrer');
+  });
+  laptop.on('pointerover', () => laptop.setTint(0x2AE130));
+  laptop.on('pointerout', () => laptop.clearTint());
+
+
+  // trophy object
+  // Diploma image proportions (relative to the image size)
+  const trophyImageWidth = 340; // Width of the trophy.png image
+  const trophyImageHeight = 100; // Height of the trophy.png image
+
+  // trophy's position and size within the image
+  const trophyOriginalX = 27; // X position in the original image
+  const trophyOriginalY = 40; // Y position in the original image
+  const trophyOriginalWidth = 19; // Width of the trophy
+  const trophyOriginalHeight = 12; // Height of the trophy
+
+  // Scale these values proportionally to match the game world
+  const trophyinteractiveX = (trophyOriginalX / trophyImageWidth) * this.cameras.main.width;
+  const trophyinteractiveY = (trophyOriginalY / trophyImageHeight) * this.cameras.main.height;
+  const trophyinteractiveWidth = (trophyOriginalWidth / trophyImageWidth) * this.cameras.main.width;
+  const trophyinteractiveHeight = (trophyOriginalHeight / trophyImageHeight) * this.cameras.main.height;
+
+  // Add the trophy image
+  const trophy = this.add.image(0, 0, 'trophy').setOrigin(0, 0).setDisplaySize(
+  this.cameras.main.width, 
+  this.cameras.main.height
+  );
+
+  // Define the interactive area for the trophy itself
+  trophy.setInteractive(
+  new Phaser.Geom.Rectangle(trophyinteractiveX, trophyinteractiveY, trophyinteractiveWidth, trophyinteractiveHeight),
+  Phaser.Geom.Rectangle.Contains
+  );
+
+
+  // Add interaction
+  trophy.on('pointerdown', () => {
+  console.log('trophy clicked!');
+  window.open('https://devpost.com/software/picnicdelphia#updates', '_blank', 'noopener,noreferrer');
+  });
+  trophy.on('pointerover', () => trophy.setTint(0x2AE130));
+  trophy.on('pointerout', () => trophy.clearTint());
+
+
+  // notes object
+  // Diploma image proportions (relative to the image size)
+  const notesImageWidth = 340; // Width of the notes.png image
+  const notesImageHeight = 100; // Height of the notes.png image
+
+  // notes's position and size within the image
+  const notesOriginalX = 163; // X position in the original image
+  const notesOriginalY = 65; // Y position in the original image
+  const notesOriginalWidth = 24; // Width of the notes
+  const notesOriginalHeight = 18; // Height of the notes
+
+  // Scale these values proportionally to match the game world
+  const notesinteractiveX = (notesOriginalX / notesImageWidth) * this.cameras.main.width;
+  const notesinteractiveY = (notesOriginalY / notesImageHeight) * this.cameras.main.height;
+  const notesinteractiveWidth = (notesOriginalWidth / notesImageWidth) * this.cameras.main.width;
+  const notesinteractiveHeight = (notesOriginalHeight / notesImageHeight) * this.cameras.main.height;
+
+  // Add the notes image
+  const notes = this.add.image(0, 0, 'notes').setOrigin(0, 0).setDisplaySize(
+  this.cameras.main.width, 
+  this.cameras.main.height
+  );
+
+  // Define the interactive area for the notes itself
+  notes.setInteractive(
+  new Phaser.Geom.Rectangle(notesinteractiveX, notesinteractiveY, notesinteractiveWidth, notesinteractiveHeight),
+  Phaser.Geom.Rectangle.Contains
+  );
+
+
+  // Add interaction
+  notes.on('pointerdown', () => {
+  console.log('notes clicked!');
+  window.open('https://devpost.com/software/picnicdelphia#updates', '_blank', 'noopener,noreferrer');
+  });
+  notes.on('pointerover', () => notes.setTint(0x2AE130));
+  notes.on('pointerout', () => notes.clearTint());
+
+
+  // toDoList object
+  // toDoList image proportions (relative to the image size)
+  const toDoListImageWidth = 340; // Width of the toDoList.png image
+  const toDoListImageHeight = 100; // Height of the toDoList.png image
+
+  // toDoList's position and size within the image
+  const toDoListOriginalX = 265; // X position in the original image
+  const toDoListOriginalY = 58; // Y position in the original image
+  const toDoListOriginalWidth = 9; // Width of the toDoList
+  const toDoListOriginalHeight = 15; // Height of the toDoList
+
+  // Scale these values proportionally to match the game world
+  const toDoListinteractiveX = (toDoListOriginalX / toDoListImageWidth) * this.cameras.main.width;
+  const toDoListinteractiveY = (toDoListOriginalY / toDoListImageHeight) * this.cameras.main.height;
+  const toDoListinteractiveWidth = (toDoListOriginalWidth / toDoListImageWidth) * this.cameras.main.width;
+  const toDoListinteractiveHeight = (toDoListOriginalHeight / toDoListImageHeight) * this.cameras.main.height;
+
+  // Add the toDoList image
+  const toDoList = this.add.image(0, 0, 'toDoList').setOrigin(0, 0).setDisplaySize(
+  this.cameras.main.width, 
+  this.cameras.main.height
+  );
+
+  // Define the interactive area for the toDoList itself
+  toDoList.setInteractive(
+  new Phaser.Geom.Rectangle(toDoListinteractiveX, toDoListinteractiveY, toDoListinteractiveWidth, toDoListinteractiveHeight),
+  Phaser.Geom.Rectangle.Contains
+  );
+
+
+  // Add interaction
+  toDoList.on('pointerdown', () => {
+  console.log('toDoList clicked!');
+  window.open('https://devpost.com/software/picnicdelphia#updates', '_blank', 'noopener,noreferrer');
+  });
+  toDoList.on('pointerover', () => toDoList.setTint(0x2AE130));
+  toDoList.on('pointerout', () => toDoList.clearTint());
 
  /** 
     // chair interaction
