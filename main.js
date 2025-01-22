@@ -266,6 +266,10 @@ const config = {
       tooltip.style.display = 'none'; // Hide tooltip
       chair.clearTint()});
     chair.on('pointerdown', () => {
+      // BUG FIX: if player is already sitting, sitting again will break player
+      if (player.isSitting) {
+        return;
+      }
       // Disable player control during the movement
       player.setVelocityX(0);
   
@@ -473,7 +477,7 @@ const config = {
   });
   toDoList.on('pointerover', () => {
     tooltip.style.display = 'flex';
-    tooltipText.innerText = 'click to leave me feedback!';
+    tooltipText.innerText = 'click to contact me!';
     toDoList.setTint(0x2AE130)});
   toDoList.on('pointerout', () => {
     tooltip.style.display = 'none'; // Hide tooltip
@@ -576,7 +580,7 @@ const config = {
     // movement is stopped if user is sitting
     // interrupt sitting with walking left or right
     if (player.isSitting) {
-      
+
       if (cursors.left.isDown || cursors.right.isDown) {
       // stand when left or right are pressed
       console.log('now standing');
