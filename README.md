@@ -1,8 +1,11 @@
 # My Landing Page!
 
-Welcome to the repo for my website! I made this to put my projects, skills, and resume together in one place.
+Welcome to the repo for my website!  
+I made this to put my projects, skills, and resume together in one place.
 
 I'm exploring the intersections of art and technology, and creating an interactive portfolio seemed like a great place to start!
+
+![preview](assets/preview.png)
 
 ## Features
 - Interactive tooltips (hover over shiny objects to see what they do).
