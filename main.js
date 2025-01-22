@@ -1,4 +1,8 @@
 
+// tooltip elements (need one for box and text)
+const tooltip = document.getElementById('tooltip');
+const tooltipText = document.getElementById('tooltip-text');
+
 // game configuration
 const config = {
     type: Phaser.AUTO,  
@@ -173,10 +177,16 @@ const config = {
     console.log('Diploma clicked!');
     window.open('assets/Trevor_Flick_Test.pdf', '_blank', 'noopener,noreferrer');
     });
-    diploma.on('pointerover', () => diploma.setTint(0x2AE130));
-    diploma.on('pointerout', () => diploma.clearTint());
+    diploma.on('pointerover', () => {
+      tooltip.style.display = 'flex'; // Show the tooltip
+      tooltipText.innerText = 'click to view my resume!';
+      diploma.setTint(0x2AE130)});
+    diploma.on('pointerout', () => {
+      tooltip.style.display = 'none'; // Hide tooltip
+      diploma.clearTint()});
 
     
+      
     ////////////////////
     // chair object
 
@@ -295,8 +305,13 @@ const config = {
   console.log('laptop clicked!');
   window.open('https://github.com/capstone-projects-2024-fall/aldwairi-projects-skribble', '_blank', 'noopener,noreferrer');
   });
-  laptop.on('pointerover', () => laptop.setTint(0x2AE130));
-  laptop.on('pointerout', () => laptop.clearTint());
+  laptop.on('pointerover', () => {
+    tooltip.style.display = 'flex';
+    tooltipText.innerText = 'click to check out a recent project!';
+    laptop.setTint(0x2AE130)});
+  laptop.on('pointerout', () => {
+    tooltip.style.display = 'none'; // Hide tooltip
+    laptop.clearTint()});
 
 
   // trophy object
@@ -334,8 +349,13 @@ const config = {
   console.log('trophy clicked!');
   window.open('https://devpost.com/software/picnicdelphia#updates', '_blank', 'noopener,noreferrer');
   });
-  trophy.on('pointerover', () => trophy.setTint(0x2AE130));
-  trophy.on('pointerout', () => trophy.clearTint());
+  trophy.on('pointerover', () => {
+    tooltip.style.display = 'flex';
+    tooltipText.innerText = 'click to check out a winning hackathon project!';
+    trophy.setTint(0x2AE130)});
+  trophy.on('pointerout', () => {
+    tooltip.style.display = 'none'; // Hide tooltip
+    trophy.clearTint()});
 
 
   // notes object
@@ -373,8 +393,13 @@ const config = {
   console.log('notes clicked!');
   window.open('https://devpost.com/software/picnicdelphia#updates', '_blank', 'noopener,noreferrer');
   });
-  notes.on('pointerover', () => notes.setTint(0x2AE130));
-  notes.on('pointerout', () => notes.clearTint());
+  notes.on('pointerover', () =>{
+    tooltip.style.display = 'flex';
+    tooltipText.innerText = 'click to see the design process for this site!';
+    notes.setTint(0x2AE130)});
+  notes.on('pointerout', () => {
+    tooltip.style.display = 'none'; // Hide tooltip
+    notes.clearTint()});
 
 
   // toDoList object
@@ -412,8 +437,13 @@ const config = {
   console.log('toDoList clicked!');
   window.open('https://devpost.com/software/picnicdelphia#updates', '_blank', 'noopener,noreferrer');
   });
-  toDoList.on('pointerover', () => toDoList.setTint(0x2AE130));
-  toDoList.on('pointerout', () => toDoList.clearTint());
+  toDoList.on('pointerover', () => {
+    tooltip.style.display = 'flex';
+    tooltipText.innerText = 'click to leave me feedback!';
+    toDoList.setTint(0x2AE130)});
+  toDoList.on('pointerout', () => {
+    tooltip.style.display = 'none'; // Hide tooltip
+    toDoList.clearTint()});
 
  /** 
     // chair interaction

@@ -12,3 +12,34 @@
 
 
   }
+
+  #tooltip {
+    position: absolute;
+    top: 20px; /* Position the tooltip at the top */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 33vw; /* The tooltip box width */
+    height: 13vw; /* The tooltip box height */
+    background-image: url('assets/textbox.png');
+    background-size: cover; /* Ensure the background fits perfectly */
+    background-position: center;
+    display: flex; /* Use flexbox for centering content */
+    justify-content: center; /* Horizontally center text */
+    align-items: center; /* Vertically center text */
+    pointer-events: none; /* Prevent interaction interference */
+    z-index: 1; /* Ensure it’s on top of everything */
+  }
+  
+  #tooltip-text {
+    font-size: clamp(12px, 1.5vw, 24px); /* Dynamically resize text */
+    font-family: 'Press Start 2P', monospace; /* Pixelated font */
+    color: gray; /* Text color */
+    text-align: center; /* Center-align text */
+    margin: 0; /* Remove default margins */
+    padding: 5%; /* Add internal spacing if needed */
+    line-height: 1.2; /* Adjust line height for better readability */
+    word-wrap: break-word; /* Ensure long words break properly */
+    box-sizing: border-box; /* Ensure padding doesn’t exceed the width */
+    z-index: 2;
+  }
+  
