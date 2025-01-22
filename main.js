@@ -67,6 +67,10 @@ const config = {
     this.load.image('trophy', 'assets/trophy.png');
     this.load.image('notes', 'assets/notes.png');
     this.load.image('toDoList', 'assets/toDoList.png');
+    this.load.spritesheet('sparkles', 'assets/sparkles.png', { frameWidth: 340, frameHeight: 100 });
+    this.load.spritesheet('chairSparkles', 'assets/chairSparkles.png', { frameWidth: 340, frameHeight: 100 });
+
+
 
 
 
@@ -107,7 +111,7 @@ const config = {
   player.setOffset(0,-6);
 
   player.setCollideWorldBounds(true); // Prevent player from falling out of the game world
-  player.setDepth(2); // Ensure player is above the background
+  player.setDepth(11); // Ensure player is above the background
 
   player.facing = 'left';
   player.isSitting = false;
@@ -115,6 +119,31 @@ const config = {
   // Add collision between player and platform
   this.physics.add.collider(player, platforms);
 
+   // Add sparkle effect 
+   this.anims.create({
+    key: 'sparkleAnim',
+    frames: this.anims.generateFrameNumbers('sparkles', { start: 0, end: 7 }),
+    frameRate: 7,
+    repeat: -1
+  });
+
+  const sparkle = this.add.sprite(0, 0, 'sparkles').setOrigin(0, 0).setDisplaySize(gameWidth, gameHeight);
+    sparkle.play('sparkleAnim');
+    sparkle.setDepth(3);
+
+
+  // Add chair sparkles (needed new layer since its depth is higher)
+  // Add sparkle effect 
+  this.anims.create({
+    key: 'chairSparkleAnim',
+    frames: this.anims.generateFrameNumbers('chairSparkles', { start: 0, end: 7 }),
+    frameRate: 7,
+    repeat: -1
+  });
+
+  const chairSparkle = this.add.sprite(0, 0, 'chairSparkles').setOrigin(0, 0).setDisplaySize(gameWidth, gameHeight);
+    chairSparkle.play('chairSparkleAnim');
+    chairSparkle.setDepth(13);
 
     // add ground
    // platforms = this.physics.add.staticGroup();
@@ -218,7 +247,7 @@ const config = {
     Phaser.Geom.Rectangle.Contains
     );
 
-    chair.setDepth(2);
+    chair.setDepth(12);
 
     // sitting (prob have to rename this, see if you can SELECT SPECIFIC OBJECT to start animation, and MOVE SPRITE TO 
     // specific spot)
@@ -229,8 +258,13 @@ const config = {
       repeat: -1
     });
 
-    chair.on('pointerover', () => chair.setTint(0x2AE130));
-    chair.on('pointerout', () => chair.clearTint());
+    chair.on('pointerover', () => {
+    tooltip.style.display = 'flex';
+    tooltipText.innerText = 'click to relax!';
+    chair.setTint(0x2AE130)});
+    chair.on('pointerout', () => {
+      tooltip.style.display = 'none'; // Hide tooltip
+      chair.clearTint()});
     chair.on('pointerdown', () => {
       // Disable player control during the movement
       player.setVelocityX(0);
@@ -542,12 +576,13 @@ const config = {
     // movement is stopped if user is sitting
     // interrupt sitting with walking left or right
     if (player.isSitting) {
+      
       if (cursors.left.isDown || cursors.right.isDown) {
       // stand when left or right are pressed
       console.log('now standing');
       player.isSitting = false;
       player.anims.play(player.facing === 'left' ? 'standLeft' : 'standRight', true);
-      player.setDepth(1);
+      player.setDepth(11);
       player.setOffset(0, -6);
 
 
