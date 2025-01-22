@@ -204,7 +204,7 @@ const config = {
     // Add interaction
     diploma.on('pointerdown', () => {
     console.log('Diploma clicked!');
-    window.open('assets/Trevor_Flick_Test.pdf', '_blank', 'noopener,noreferrer');
+    window.open('assets/Trevor_Flick_Resume.pdf', '_blank', 'noopener,noreferrer');
     });
     diploma.on('pointerover', () => {
       tooltip.style.display = 'flex'; // Show the tooltip
@@ -470,10 +470,14 @@ const config = {
   );
 
 
-  // Add interaction
+  // interaction
   toDoList.on('pointerdown', () => {
-  console.log('toDoList clicked!');
-  window.open('https://devpost.com/software/picnicdelphia#updates', '_blank', 'noopener,noreferrer');
+  console.log('toDoList clicked');
+  // open email
+  // trying to prevent bots from getting this, idk how effective though since my 
+  // resume is already on the site oh well
+  const email = 'me' + '@' + 'trevorflick.com';
+  window.location.href = `mailto:${email}`;
   });
   toDoList.on('pointerover', () => {
     tooltip.style.display = 'flex';
