@@ -13,7 +13,7 @@ I'm exploring the intersections of art and technology, and creating an interacti
 - Sprite movement; walk around and get familiar with the place!
 - Clean/responsive design for (hopefully) easy navigation.
 - Includes my **[resume](https://trevorflick.com/assets/Trevor_Flick_Resume.pdf)** and links to projects I've worked on.  
-- Deployed with [GitHub Pages](https://pages.github.com) using a custom domain (Yay!).
+- Deployed with GitHub Pages using a custom domain.
 
 ## Live Site
 Visit the live website here: [trevorflick.com](https://trevorflick.com)  
@@ -21,7 +21,7 @@ I'll be adding new features as my portfolio continues to grow, so stay tuned!
 
 ## Project Structure
 root/  
-    ├── main.js # JavaScript for interactivity (built using Phaser's 'scene' object, using preload, create, and update functions)  
+    ├── main.js # JavaScript for interactivity (built using Phaser's 'scene' object)  
     ├── index.html # Main HTML structure  
     ├── styles.css # Custom styles  
     └── assets/  
@@ -34,7 +34,7 @@ root/
 - **[Phaser Framework](https://phaser.io/)**: For gamifying (rendering, physics, objects, scene management, input handling). 
 - **HTML**: For structuring content.
 - **CSS**: For styling and layout.
-- **[Piskel](piskel.com)**: For creating the sprites, animations, and background.
+- **[Piskel](https://www.piskelapp.com/)**: For creating the sprites, animations, and background.
 - **GitHub Pages**: For hosting and deployment.
 - **Custom Domain**: Configured with `trevorflick.com`.
 
@@ -47,7 +47,7 @@ root/
     ```bash 
     cd site 
 3. Open **index.html** in your browser to view the site locally.
-    - VSCode has live server extenstions (like Live Preview from Microsoft) that can be downloaded to run this very easily
+    - VSCode has live server extenstions (like Live Preview from Microsoft) that can be downloaded to run this very easily.
     - if you're not using VSCode I recommend getting node.js since it includes npm:
         - download [node.js](https://nodejs.org/en)
         - install http-server at the root directory of project:
@@ -61,7 +61,8 @@ root/
 - Add sounds for the tooltips.  
 - Add a feature to see other people who are on the site.  
 - Include some type of interactive Philly food/restaurant component.  
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(The Google and Yelp APIs are quite pricey! Any cheaper/free alternatives for Philly business details would be appreciated!)
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(The Google and Yelp APIs are quite pricey! Any cheaper/free
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alternatives for Philly business details would be appreciated!)
 
 ## Contributions
 Contributions are always welcome!  
