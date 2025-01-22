@@ -71,8 +71,11 @@ If you'd like to:
 - suggest improvements  
 - collaborate on future features  
 - report any bugs
+- chat about game design in general
 
 1. Fork the repository.  
 2. Create a new branch for your changes.  
 3. Open a pull request describing the changes.  
 4. Send me a [message](me@trevorflick.com) and I'll take a look!
+
+
