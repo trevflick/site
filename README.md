@@ -61,7 +61,7 @@ root/
 - Add sounds for the tooltips.  
 - Add a feature to see other people who are on the site.  
 - Include some type of interactive Philly food/restaurant component.  
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(The Google and Yelp APIs are quite pricey! Any cheaper/free
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(The Google and Yelp APIs are quite pricey! Any cheaper/free  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alternatives for Philly business details would be appreciated!)
 
 ## Contributions
