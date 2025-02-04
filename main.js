@@ -48,7 +48,7 @@ const config = {
   // preload room and sprite
   function preload() {
 
-    this.load.image('newScene', 'assets/newScene.png');
+    this.load.image('newScene', 'assets/newSceneBlue.png');
 
     // HAVE TO MAKE A GROUND TO STAND ON AND WALLS TO NOT WALK THROUGH
     this.load.image('ground', 'assets/ground.png');
@@ -70,7 +70,8 @@ const config = {
     this.load.spritesheet('sparkles', 'assets/sparkles.png', { frameWidth: 340, frameHeight: 100 });
     this.load.spritesheet('chairSparkles', 'assets/chairSparkles.png', { frameWidth: 340, frameHeight: 100 });
 
-
+    // preload sound effect
+    this.load.audio('hoverSound', 'assets/hover.mp3');
 
 
 
@@ -126,6 +127,13 @@ const config = {
     frameRate: 7,
     repeat: -1
   });
+
+  // unlock audio context since sites block it by default i think (chrome does)
+  //this.sound.context.resume().then(() => {
+  //  console.log('Audio unlocked');
+  //});
+
+  // const hoverSound = this.sound.add('hoverSound');
 
   const sparkle = this.add.sprite(0, 0, 'sparkles').setOrigin(0, 0).setDisplaySize(gameWidth, gameHeight);
     sparkle.play('sparkleAnim');
@@ -207,6 +215,7 @@ const config = {
     window.open('assets/Trevor_Flick_Resume.pdf', '_blank', 'noopener,noreferrer');
     });
     diploma.on('pointerover', () => {
+      //hoverSound.play(); 
       tooltip.style.display = 'flex'; // Show the tooltip
       tooltipText.innerText = 'click to view my resume!';
       diploma.setTint(0x2AE130)});
@@ -259,12 +268,17 @@ const config = {
     });
 
     chair.on('pointerover', () => {
+    //hoverSound.play();   
     tooltip.style.display = 'flex';
     tooltipText.innerText = 'click to relax!';
     chair.setTint(0x2AE130)});
     chair.on('pointerout', () => {
       tooltip.style.display = 'none'; // Hide tooltip
       chair.clearTint()});
+
+    // keep track of scene reference
+    const scene = this;
+
     chair.on('pointerdown', () => {
       // BUG FIX: if player is already sitting, sitting again will break player
       if (player.isSitting) {
@@ -275,26 +289,43 @@ const config = {
   
       // Calculate target X position for the chair
       const targetX = CHAIRinteractiveX + CHAIRinteractiveWidth / 2;
+
+      const isMovingRight = player.x < targetX;
+      const walkAnimation = isMovingRight ? 'rightWalk' : 'leftWalk';
+
+      // Play walk animation before moving
+      player.anims.play(walkAnimation, true);
   
       // Use a tween to move the player to the chair's position
-      this.tweens.add({
+      //changed this to scene here...hopefully this works
+      // i think the tween is overriding the animation here
+      // it isn't updating frame-by-frame prob???
+      scene.tweens.add({
           targets: player,
           x: targetX,
           duration: Math.abs(player.x - targetX) * 13, // Adjust duration based on distance
           ease: 'Sine.Out',
-          onUpdate: (tween) => {
+          onUpdate: (tween, target) => {
+            // Ensure the player is still animating while moving
+            if (target.anims.currentAnim?.key !== walkAnimation) {
+              target.anims.play(walkAnimation, true);
+          }
+
+            
             // Play the appropriate walking animation during the tween
             if (player.x < targetX) {
                 if (player.anims.currentAnim?.key !== 'rightWalk') {
                     player.anims.play('rightWalk', true);
                 }
-                player.facing = 'right';
+                //player.facing = 'right';
             } else if (player.x > targetX) {
                 if (player.anims.currentAnim?.key !== 'leftWalk') {
                     player.anims.play('leftWalk', true);
                 }
-                player.facing = 'left';
+                //player.facing = 'left';
             }
+            
+
         },
           onComplete: () => {
               // Play the sitting animation once the player reaches the chair
@@ -305,8 +336,9 @@ const config = {
               player.isSitting = true; // Set the sitting state
           }
       });
+  
     
-  });
+    });
 
   // laptop object
   // Diploma image proportions (relative to the image size)
@@ -344,6 +376,7 @@ const config = {
   window.open('https://github.com/capstone-projects-2024-fall/aldwairi-projects-skribble', '_blank', 'noopener,noreferrer');
   });
   laptop.on('pointerover', () => {
+    //hoverSound.play();
     tooltip.style.display = 'flex';
     tooltipText.innerText = 'click to check out a recent project!';
     laptop.setTint(0x2AE130)});
@@ -388,6 +421,7 @@ const config = {
   window.open('https://devpost.com/software/picnicdelphia', '_blank', 'noopener,noreferrer');
   });
   trophy.on('pointerover', () => {
+    //hoverSound.play();
     tooltip.style.display = 'flex';
     tooltipText.innerText = 'click to check out a winning hackathon project!';
     trophy.setTint(0x2AE130)});
@@ -432,6 +466,7 @@ const config = {
   window.open('assets/ProjectNotes.pdf', '_blank', 'noopener,noreferrer');
   });
   notes.on('pointerover', () =>{
+    //hoverSound.play();
     tooltip.style.display = 'flex';
     tooltipText.innerText = 'click to see the design process for this site!';
     notes.setTint(0x2AE130)});
@@ -480,6 +515,7 @@ const config = {
   window.location.href = `mailto:${email}`;
   });
   toDoList.on('pointerover', () => {
+    //hoverSound.play();
     tooltip.style.display = 'flex';
     tooltipText.innerText = 'click to contact me!';
     toDoList.setTint(0x2AE130)});

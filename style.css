@@ -3,9 +3,11 @@
     padding: 0;
     width: 100%;
     height: 100%;
-    background-image: url('assets/bricks.png');
+    background-image: url('assets/bricksBlue.png');
     background-repeat: repeat; 
     background-size: 256px 256px; /* size up */
+    background-color: #080c27;
+    /* gray fallback
     background-color: #6b7b87; /* fallback */
     image-rendering: pixelated; /* awesome scaling tool */
     background-position: 0 -7px;
@@ -33,7 +35,7 @@
   #tooltip-text {
     font-size: clamp(12px, 1.5vw, 24px); /* Dynamically resize text */
     font-family: 'Press Start 2P', monospace; /* Pixelated font */
-    color: gray; /* Text color */
+    color: #3b4065; /* Text color */
     text-align: center; /* Center-align text */
     margin: 0; /* Remove default margins */
     padding: 5%; /* Add internal spacing if needed */
