@@ -385,7 +385,7 @@ const config = {
   // Add interaction
   trophy.on('pointerdown', () => {
   console.log('trophy clicked!');
-  window.open('https://devpost.com/software/picnicdelphia#updates', '_blank', 'noopener,noreferrer');
+  window.open('https://devpost.com/software/picnicdelphia', '_blank', 'noopener,noreferrer');
   });
   trophy.on('pointerover', () => {
     tooltip.style.display = 'flex';
@@ -429,7 +429,7 @@ const config = {
   // Add interaction
   notes.on('pointerdown', () => {
   console.log('notes clicked!');
-  window.open('https://devpost.com/software/picnicdelphia#updates', '_blank', 'noopener,noreferrer');
+  window.open('assets/ProjectNotes.pdf', '_blank', 'noopener,noreferrer');
   });
   notes.on('pointerover', () =>{
     tooltip.style.display = 'flex';
