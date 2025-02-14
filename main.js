@@ -8,6 +8,7 @@ const config = {
     type: Phaser.AUTO,  
     width: 340,
     height: 100,
+    parent: 'game-container', // <-- Ensures it goes inside our div
     pixelArt: true,   // declare this for upscaling
     scale: {
       mode: Phaser.Scale.FIT, // FIT for full screen, None for smaller

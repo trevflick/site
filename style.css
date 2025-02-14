@@ -44,4 +44,15 @@
     box-sizing: border-box; /* Ensure padding doesn’t exceed the width */
     z-index: 2;
   }
+
+  #game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Take full viewport height */
+    width: 100vw;   /* Take full viewport width */
+  }
+  canvas {
+    display: block; /* Ensures no extra margins */
+  }
   
