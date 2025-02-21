@@ -154,6 +154,21 @@ const config = {
     chairSparkle.play('chairSparkleAnim');
     chairSparkle.setDepth(13);
 
+
+
+  // Set up the clock text display
+  this.clockText = this.add.text(20, 20, '', {
+    fontSize: '24px',
+    fontFamily: 'Courier',
+    color: '#ffffff'
+  });
+
+  // Update clock immediately and then every second
+  updateClock.call(this);
+  this.time.addEvent({ delay: 1000, callback: updateClock, callbackScope: this, loop: true });
+
+
+
     // add ground
    // platforms = this.physics.add.staticGroup();
 
@@ -679,8 +694,25 @@ const config = {
         player.anims.play('standRight', true);
       }
     }
+  }
 
+  // Helper function: updates the clock every second
+  function updateClock() {
+  const now = new Date();
+  const utcOffset = now.getTimezoneOffset(); // Minutes offset from UTC
+  const estOffset = -5 * 60; // UTC-5 for Eastern Standard Time
+  const estTime = new Date(now.getTime() + (estOffset - utcOffset) * 60000);
 
+  let hours = estTime.getHours();
+  let minutes = estTime.getMinutes();
 
+  // Convert to 12-hour format
+  hours = hours % 12 || 12; // Ensures 12 instead of 0
+
+  // Format minutes (add leading zero if needed)
+  const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')}`;
+
+  // Update text display
+  this.clockText.setText(formattedTime);
   }
   
