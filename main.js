@@ -155,6 +155,7 @@ const config = {
     chairSparkle.setDepth(13);
 
 
+/*
 
   // Set up the clock text display
   this.clockText = this.add.text(20, 20, '', {
@@ -167,7 +168,7 @@ const config = {
   updateClock.call(this);
   this.time.addEvent({ delay: 1000, callback: updateClock, callbackScope: this, loop: true });
 
-
+*/
 
     // add ground
    // platforms = this.physics.add.staticGroup();
@@ -696,6 +697,7 @@ const config = {
     }
   }
 
+  /*
   // Helper function: updates the clock every second
   function updateClock() {
   const now = new Date();
@@ -715,4 +717,5 @@ const config = {
   // Update text display
   this.clockText.setText(formattedTime);
   }
+  */
   
